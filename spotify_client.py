@@ -21,17 +21,24 @@ class SpotifyClient:
         ))
         self.user_id = self.sp.current_user()["id"]
 
-    def search_song_uris(self, song_titles, year):
+    def search_song_uris(self, song_list, year):
+        """
+        Accepts a list of (title, artist) tuples.
+        Searches each song on Spotify and returns a list of URIs and not-found songs.
+        """
         uris = []
         not_found = []
-        for title in song_titles:
-            result = self.sp.search(q=f"track:{title} year:{year}", type="track")
+
+        for title, artist in song_list:
+            query = f"track:{title} artist:{artist} year:{year}"
+            result = self.sp.search(q=query, type="track", limit=1)
             try:
                 uri = result["tracks"]["items"][0]["uri"]
                 uris.append(uri)
             except IndexError:
-                print(f"⚠️ '{title}' not found on Spotify. Skipped.")
-                not_found.append(title)
+                print(f"⚠️ '{title}' by {artist} not found on Spotify. Skipped.")
+                not_found.append(f"{title} - {artist}")
+
         return uris, not_found
 
     def create_playlist(self, name, description=""):
@@ -41,7 +48,7 @@ class SpotifyClient:
             public=False,
             description=description
         )
-        return playlist  # Returning full playlist object
+        return playlist
 
     def add_songs_to_playlist(self, playlist_id, track_uris):
         self.sp.playlist_add_items(playlist_id=playlist_id, items=track_uris)
