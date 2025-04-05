@@ -1,0 +1,4 @@
+.env
+token.txt
+__pycache__/
+not_found_songs.txt
