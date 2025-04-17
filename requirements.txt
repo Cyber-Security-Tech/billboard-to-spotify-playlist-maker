@@ -1,4 +1,4 @@
-spotipy
-requests
-beautifulsoup4
-python-dotenv
+spotipy>=2.23.0
+requests>=2.25.0
+beautifulsoup4>=4.9.3
+python-dotenv>=0.21.0

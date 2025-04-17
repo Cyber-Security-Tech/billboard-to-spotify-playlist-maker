@@ -1,4 +1,11 @@
-# 🎶 Billboard to Spotify Playlist Maker
+# 🎧 Billboard to Spotify Playlist Maker
+
+**Type:** Intermediate Python Automation Project  
+**Built With:** `Python`, `Spotipy`, `BeautifulSoup`, `Requests`, `dotenv`
+
+---
+
+## 🔍 Overview
 
 Turn any Billboard Hot 100 chart into a real Spotify playlist – just by entering a date.  
 Whether it's your birthday, a nostalgic throwback, or a special day in history, this tool brings the music of that moment directly into your Spotify account.
@@ -34,13 +41,19 @@ This isn’t just a simple API project — it showcases real-world software engi
 
 ```
 spotify_playlist_maker/
-│
 ├── main.py               # Orchestrates user input, scraping, Spotify integration
 ├── scraper.py            # Scrapes Billboard chart titles & artists
 ├── spotify_client.py     # Handles Spotify login, search, and playlist creation
 ├── not_found_songs.txt   # Auto-generated file logging skipped songs
 ├── .env                  # Contains your Spotify API credentials
-└── README.md             # You're reading it!
+├── .env.example          # Example template for environment setup
+├── requirements.txt      # Project dependencies
+├── README.md             # You're reading it!
+└── media/
+    ├── screenshots/
+    │   └── terminal_output.png
+    └── demo/
+        └── demo.gif
 ```
 
 ---
@@ -56,12 +69,18 @@ cd spotify_playlist_maker
 
 ### 2. Set up environment variables
 
-Create a `.env` file in the root directory with the following content:
+Copy the example file and fill in your credentials:
+
+```bash
+cp .env.example .env
+```
+
+Inside `.env`:
 
 ```
 SPOTIPY_CLIENT_ID=your_spotify_client_id
 SPOTIPY_CLIENT_SECRET=your_spotify_client_secret
-SPOTIPY_REDIRECT_URI=http://127.0.0.1:8080
+SPOTIPY_REDIRECT_URI=http://127.0.0.1:8888/callback
 ```
 
 > 🔐 You can get these credentials by creating an app on the [Spotify Developer Dashboard](https://developer.spotify.com/dashboard).
@@ -87,7 +106,27 @@ python main.py
 
 ---
 
-## 🧪 Example
+## 📄 Environment Variables
+
+| Variable               | Description                              |
+|------------------------|------------------------------------------|
+| `SPOTIPY_CLIENT_ID`     | Your Spotify app's client ID             |
+| `SPOTIPY_CLIENT_SECRET` | Your Spotify app's client secret         |
+| `SPOTIPY_REDIRECT_URI`  | Must match the URI set in your Spotify app (e.g. `http://localhost:8888/callback`) |
+
+---
+
+## 🖼️ Screenshots & Demo
+
+### ▶️ GIF Demo
+![Demo GIF](media/demo/demo.gif)
+
+### 🖥 Terminal Output
+![Terminal Output](media/screenshots/terminal_output.png)
+
+---
+
+## 🧪 Example Output
 
 ```bash
 📅 Enter a Billboard chart date (YYYY-MM-DD): 1999-09-30
@@ -99,12 +138,13 @@ python main.py
 
 ---
 
-## 🪄 Future Ideas
+## 💡 Future Ideas
 
 - GUI version using `tkinter`
 - Deployable Flask web app version
-- Show track previews & album covers in terminal/GUI
-- Let users filter by top 10 / top 50 / full 100
+- Add CLI argument support (`--date`) for automation
+- Export full chart to `.csv` or `.json`
+- Improve search accuracy by checking artist aliases
 
 ---
 

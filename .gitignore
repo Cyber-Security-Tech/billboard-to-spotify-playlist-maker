@@ -1,4 +1,19 @@
+# Environment & Secrets
 .env
 token.txt
+.cache/
+
+# Python Cache
 __pycache__/
+*.pyc
+
+# Logs & Output
 not_found_songs.txt
+
+# VSCode / IDE
+.vscode/
+.idea/
+
+# OS Files
+.DS_Store
+Thumbs.db
